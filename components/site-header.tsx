@@ -1,0 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription, SheetClose } from '@/components/ui/sheet';
+const links=[['Services','/services'],['Process','/process'],['The Lab','/lab'],['About','/about'],['Contact','/contact']];
+export default function Header({light=false}:{light?:boolean}){const path=usePathname();return <header className={`site-header ${light?'on-white':''}`}><a className="wordmark" href="/" aria-label="Ken Labs home">ken labs<span aria-hidden="true">✳</span></a><nav aria-label="Main navigation">{links.map(([label,href])=><a key={href} href={href} aria-current={path===href?'page':undefined}>{label}</a>)}</nav><a className="nav-cta" href="/contact">Let’s talk <span>↗</span></a><div className="mobile-menu"><Sheet><SheetTrigger className="menu-button" aria-label="Open navigation">☰</SheetTrigger><SheetContent className="mobile-sheet"><SheetTitle>ken labs</SheetTitle><SheetDescription>Attract. Convert. Automate.</SheetDescription><nav aria-label="Mobile navigation"><SheetClose render={<a href="/"/>}>Home</SheetClose>{links.map(([label,href])=><SheetClose key={href} render={<a href={href}/>}>{label}</SheetClose>)}</nav></SheetContent></Sheet></div></header>}
